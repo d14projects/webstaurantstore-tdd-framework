@@ -30,4 +30,17 @@ public void testValidCredentials() {
         Assert.assertNotEquals(Driver.getDriver().getTitle(),"Account Dashboard - WebstaurantStore");
     }
 
+    @Test
+    public void testInvalidCredentialsNoPassword() {
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+
+        new LoginPage().login(ConfigReader.getProperty("username"), "");
+
+        Assert.assertTrue(Driver.getDriver().getPageSource().contains("You entered incorrect login information"));
+
+        Assert.assertNotEquals(Driver.getDriver().getTitle(),"Account Dashboard - WebstaurantStore");
+    }
+
+
+
 }
