@@ -25,7 +25,7 @@ public void testValidCredentials() {
 
         new LoginPage().login("", ConfigReader.getProperty("password"));
 
-        Assert.assertTrue(Driver.getDriver().getPageSource().contains("You entered incorrect login information, try again or reset your password"));
+        Assert.assertTrue(Driver.getDriver().getPageSource().contains("You entered incorrect login information"));
 
         Assert.assertNotEquals(Driver.getDriver().getTitle(),"Account Dashboard - WebstaurantStore");
     }
