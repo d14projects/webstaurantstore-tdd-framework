@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.Data;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
+@Data
 public class LoginPage {
 
     public LoginPage(){
@@ -40,15 +42,30 @@ public class LoginPage {
         accountButton.click();
         signInLink.click();
         emailField.sendKeys(ConfigReader.getProperty("username"), Keys.TAB,
-                ConfigReader.getProperty("password"), Keys.ENTER);
-        SeleniumUtils.waitFor(5);
+                ConfigReader.getProperty("password"));
+        loginButton.click();
+        SeleniumUtils.waitFor(2);
+
+        if (Driver.getDriver().getTitle().contains("Sign In or Create an Account!")) {
+        passwordField.sendKeys(ConfigReader.getProperty("password"));
+        loginButton.click();
+        SeleniumUtils.waitFor(1);
+        }
     }
 
     public void login(String username, String password){
         accountButton.click();
         signInLink.click();
-        emailField.sendKeys(username, Keys.TAB, password, Keys.ENTER);
-        SeleniumUtils.waitFor(5);
+        emailField.sendKeys(username);
+        passwordField.sendKeys(password);
+        loginButton.click();
+        SeleniumUtils.waitFor(2);
+
+        if (Driver.getDriver().getTitle().contains("Sign In or Create an Account!")) {
+            passwordField.sendKeys(password);
+            loginButton.click();
+            SeleniumUtils.waitFor(1);
+        }
     }
 
 }
