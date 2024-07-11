@@ -41,7 +41,13 @@ public class LoginPage {
         signInLink.click();
         emailField.sendKeys(ConfigReader.getProperty("username"), Keys.TAB,
                 ConfigReader.getProperty("password"), Keys.ENTER);
-//        loginButton.click();
+        SeleniumUtils.waitFor(5);
+    }
+
+    public void login(String username, String password){
+        accountButton.click();
+        signInLink.click();
+        emailField.sendKeys(username, Keys.TAB, password, Keys.ENTER);
         SeleniumUtils.waitFor(5);
     }
 
