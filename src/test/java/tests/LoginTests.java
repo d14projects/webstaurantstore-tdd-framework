@@ -10,24 +10,69 @@ import utilities.SeleniumUtils;
 
 public class LoginTests extends TestBase {
 
-@Test
+@Test (groups = "smoke")
 public void testValidCredentials() {
+
+    logger.info("Navigate to homepage");
     Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
 
+    logger.info("Enter valid credentials and click login");
     new LoginPage().login();
 
+    logger.info("Verify login to Account Dashboard Page");
     Assert.assertEquals(Driver.getDriver().getTitle(),"Account Dashboard - WebstaurantStore");
 }
 
-    @Test
+    @Test (groups = "smoke")
+    public void testInvalidCredentials() {
+
+    logger.info("Navigate to homepage");
+    Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+
+    logger.info("Enter invalid credentials and click login");
+    new LoginPage().login("invalid@email.com", "invalid");
+
+    logger.info("Verify unsuccessful login by page title \"Sign In or Create an Account!\"");
+    Assert.assertTrue(Driver.getDriver().getTitle().contains("Sign In or Create an Account!"));
+}
+
+    @Test (groups = "smoke")
     public void testInvalidCredentialsNoUsername() {
-        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
 
-        new LoginPage().login("", ConfigReader.getProperty("password"));
+    logger.info("Navigate to homepage");
+    Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
 
-        Assert.assertTrue(Driver.getDriver().getPageSource().contains("You entered incorrect login information, try again or reset your password"));
+    logger.info("Enter credentials (empty username field, valid password) and click login");
+    new LoginPage().login("", ConfigReader.getProperty("password"));
 
-        Assert.assertNotEquals(Driver.getDriver().getTitle(),"Account Dashboard - WebstaurantStore");
-    }
+    logger.info("Verify unsuccessful login by page title \"Sign In or Create an Account!\"");
+    Assert.assertTrue(Driver.getDriver().getTitle().contains("Sign In or Create an Account!"));
+ }
+
+    @Test
+    public void testInvalidCredentialsNoPassword() {
+
+    logger.info("Navigate to homepage");
+    Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+
+    logger.info("Enter credentials (valid username, empty password field) and click login");
+    new LoginPage().login(ConfigReader.getProperty("username"), "");
+
+    logger.info("Verify unsuccessful login by page title \"Sign In or Create an Account!\"");
+    Assert.assertTrue(Driver.getDriver().getTitle().contains("Sign In or Create an Account!"));
+}
+
+    @Test
+    public void testInvalidCredentialsNoCredentials() {
+
+    logger.info("Navigate to homepage");
+    Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+
+    logger.info("Enter credentials (empty username and password fields) and click login");
+    new LoginPage().login("", "");
+
+    logger.info("Verify unsuccessful login by page title \"Sign In or Create an Account!\"");
+    Assert.assertTrue(Driver.getDriver().getTitle().contains("Sign In or Create an Account!"));
+}
 
 }
