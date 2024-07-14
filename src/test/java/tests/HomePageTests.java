@@ -9,7 +9,7 @@ import utilities.Driver;
 import utilities.FrameworkConstants;
 import utilities.SeleniumUtils;
 
-public class HomePageTests {
+public class HomePageTests extends TestBase {
 
     @Test
     public void clickingOnLogoFromTabletopPage(){
