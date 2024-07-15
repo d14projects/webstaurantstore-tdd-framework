@@ -48,9 +48,6 @@ public class ProductsTests extends TestBase{
 
         logger.info("Verify Actual Prices equals Expected Prices");
         Assert.assertEquals(actualPrices, expectedPrices);
-
-        System.out.println("Filter Applied - Actual Prices: " + actualPrices);
-        System.out.println("Sorted Natural - Expect Prices: " + expectedPrices);
     }
 
     @Test
@@ -84,9 +81,6 @@ public class ProductsTests extends TestBase{
 
         logger.info("Verify Actual Prices equals Expected Prices");
         Assert.assertEquals(actualPrices, expectedPrices);
-
-        System.out.println("Filter Applied - Actual Prices: " + actualPrices);
-        System.out.println("Sorted Natural - Expect Prices: " + expectedPrices);
 
     }
 
