@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LocatingTabletop;
+import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.FrameworkConstants;
@@ -20,8 +21,12 @@ public class HomePageTests extends TestBase {
     public void clickingOnLogoFromTabletopPage(){
 
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        new LoginPage().login();
+        logger.info("Sign in to user's account");
         new LocatingTabletop().elementClick();
+        logger.info("Click on Tabletop tab");
         new HomePage().clickOnLogo();
+        logger.info("Click on the Logo to get to Homepage");
         Assert.assertEquals(Driver.getDriver().getCurrentUrl() ,ConfigReader.getProperty("url"));
     }
 @Test(groups="smoke")
@@ -45,5 +50,6 @@ public void verifyNumberOfCategories(){
     System.out.println(categoriesTitles);
     Assert.assertEquals(categoriesTitles.size(),18);
 }
+
 
 }
