@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LocatingTabletop;
+import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.FrameworkConstants;
@@ -20,11 +21,15 @@ public class HomePageTests extends TestBase {
     public void clickingOnLogoFromTabletopPage(){
 
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        new LoginPage().login();
+        logger.info("Sign in to user's account");
         new LocatingTabletop().elementClick();
+        logger.info("Click on Tabletop tab");
         new HomePage().clickOnLogo();
+        logger.info("Click on the Logo to get to Homepage");
         Assert.assertEquals(Driver.getDriver().getCurrentUrl() ,ConfigReader.getProperty("url"));
     }
-@Test
+@Test(groups="smoke")
 public void verifyUrlWhenClickingOnLogo(){
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
         new HomePage().clickOnLogo();
@@ -37,6 +42,7 @@ public void verifyNumberOfCategories(){
 
     Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
     List<WebElement> listOfFeaturedCategories = Driver.getDriver().findElements(By.xpath("//li[@class='text-center mb-8 group lt:mb-4']"));
+
     List<String> categoriesTitles = new ArrayList<>();
     for (WebElement categories : listOfFeaturedCategories){
         categoriesTitles.add(categories.getText());
@@ -46,4 +52,27 @@ public void verifyNumberOfCategories(){
     Assert.assertEquals(categoriesTitles.size(),18);
 }
 
+@Test(enabled = false)
+    public void clickOnEachCategoryLink(){
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+
+    List<WebElement> listOfFeaturedCategories = Driver.getDriver().findElements(By.xpath("//li[@class='text-center mb-8 group lt:mb-4']"));
+    List<String> categoriesTitles = new ArrayList<>();
+        for (WebElement element : listOfFeaturedCategories) {
+        categoriesTitles.add(element.getText());
+        element.click();
+        SeleniumUtils.waitFor(3);
+       //Assert.assertTrue(Driver.getDriver().getTitle().contains(actualTitleOfCategory),actualTitleOfCategory);
+        Driver.getDriver().navigate().back();
+        SeleniumUtils.waitFor(3);
+
+    }
+    listOfFeaturedCategories = Driver.getDriver().findElements(By.xpath("//li[@class='text-center mb-8 group lt:mb-4']"));
+
+
+
+
+
+
+}
 }
