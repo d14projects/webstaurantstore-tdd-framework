@@ -26,6 +26,10 @@ private WebElement RestaurantEquipment;
 @FindBy (xpath = "//p[@class='text-sm leading-none text-gray-900 group-hover:text-green-500 group-hover:underline mb-0 p-1 transition-all duration-75 ease-in-out mt-2 lt:mt-5' and contains(text(), 'Commercial Refrigeration')]")
 private WebElement CommercialRefrigeration;
 
+    public WebElement getSmallwares() {
+        return Smallwares;
+    }
+
     @FindBy (xpath = "//p[@class='text-sm leading-none text-gray-900 group-hover:text-green-500 group-hover:underline mb-0 p-1 transition-all duration-75 ease-in-out mt-2 lt:mt-5' and contains(text(), 'Smallwares')]")
     private WebElement Smallwares;
     @FindBy (xpath = "//p[@class='text-sm leading-none text-gray-900 group-hover:text-green-500 group-hover:underline mb-0 p-1 transition-all duration-75 ease-in-out mt-2 lt:mt-5' and contains(text(), 'Storage & Transport')]")
@@ -58,5 +62,9 @@ private WebElement CommercialRefrigeration;
     private WebElement BusinessType;
     @FindBy (xpath = "//p[@class='text-sm leading-none text-gray-900 group-hover:text-green-500 group-hover:underline mb-0 p-1 transition-all duration-75 ease-in-out mt-2 lt:mt-5' and contains(text(), 'New Items')]")
     private WebElement NewItems;
+
+    public void clickOnLink( WebElement linkName){
+       linkName.click();
+    }
 
 }
