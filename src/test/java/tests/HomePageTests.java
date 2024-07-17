@@ -24,7 +24,7 @@ public class HomePageTests extends TestBase {
         new HomePage().clickOnLogo();
         Assert.assertEquals(Driver.getDriver().getCurrentUrl() ,ConfigReader.getProperty("url"));
     }
-@Test
+@Test(groups="smoke")
 public void verifyUrlWhenClickingOnLogo(){
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
         new HomePage().clickOnLogo();
