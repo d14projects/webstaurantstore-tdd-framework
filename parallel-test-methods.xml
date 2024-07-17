@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Parallel Test Methods" parallel="methods" thread-count="6">
+
+    <test name="UI Regression Parallel Tests">
+
+        <classes>
+            <class name="tests.EquipmentBarTests"></class>
+            <class name="tests.HomePageTests"></class>
+            <class name="tests.LoginTests"></class>
+            <class name="tests.ProductsTests"></class>
+            <class name="tests.SearchBar"></class>
+            <class name="tests.TableTopTest"></class>
+        </classes>
+
+    </test>
+
+</suite>
