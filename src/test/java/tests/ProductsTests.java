@@ -17,6 +17,7 @@ import java.util.List;
 
 public class ProductsTests extends TestBase{
 
+
     @Test (groups = "smoke")
     public void verifyPriceFilterLowToHigh() {
 
@@ -42,9 +43,13 @@ public class ProductsTests extends TestBase{
         logger.info("Get the list of Actual Prices after Filter Applied");
         List<Double> actualPrices = new ProductsPage().getRegularPrices();
 
+        System.out.println("Actual Prices; " + new ProductsPage().getRegularPrices());
+
         logger.info("Sort the Expected Prices list in Natural Order");
         List<Double> expectedPrices = new ArrayList<>(actualPrices);
         expectedPrices.sort(Comparator.naturalOrder());
+
+        System.out.println("Expected Prices; " + expectedPrices);
 
         logger.info("Verify Actual Prices equals Expected Prices");
         Assert.assertEquals(actualPrices, expectedPrices);

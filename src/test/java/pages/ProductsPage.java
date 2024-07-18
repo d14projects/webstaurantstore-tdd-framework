@@ -36,23 +36,23 @@ public class ProductsPage {
     @FindBy(xpath ="//div[@data-testid='price']")
     private List<WebElement> prices;
 
-    public List<Double> getRegularPrices() {
-        List<Double> actualPrices = new ArrayList<>();
+//    public List<Double> getRegularPrices() {
+//        List<Double> actualPrices = new ArrayList<>();
+//
+//        for (WebElement price : prices) {
+//            if (!price.getText().contains("Sale")) {
+//                String each = price.getText().replaceAll("[^0-9.]", "");
+//                String[] numbers = each.split("(?<=\\d{1,5}\\.\\d{2})(?=\\d)");
+//                for (String number : numbers) {
+//                    actualPrices.add(Double.parseDouble(number));
+//                }
+//            }
+//        }
+//        return actualPrices;
+//    }
 
-        for (WebElement price : prices) {
-            if (!price.getText().contains("Sale")) {
-                String each = price.getText().replaceAll("[^0-9.]", "");
-                String[] numbers = each.split("(?<=\\d{1,5}\\.\\d{2})(?=\\d)");
-                for (String number : numbers) {
-                    actualPrices.add(Double.parseDouble(number));
-                }
-            }
-        }
-        return actualPrices;
-    }
-
-        @FindBy(id = "sort_options")
-        private WebElement dropdownMenu;
+    @FindBy(id = "sort_options")
+    private WebElement dropdownMenu;
 
     @FindBy(xpath ="//p[@data-testid='itemSale']")
     private List<WebElement> productsOnSale;
@@ -63,6 +63,28 @@ public void verifyContainsText(List<WebElement> list, String keyword){
     }
 }
 
+
+    public List<Double> getRegularPrices() {
+        List<Double> actualPrices = new ArrayList<>();
+
+           for (WebElement price : prices) {
+            String[] lines = price.getText().split("\n");
+
+            for (String line : lines) {
+                if (line.startsWith("$")) {
+                    int dollarIndex = line.indexOf('$') + 1;
+                    int slashIndex = line.indexOf('/');
+
+                    if (slashIndex != -1) {
+                        String result = line.substring(dollarIndex, slashIndex);
+                        result = result.replace(",", "");
+                        actualPrices.add(Double.parseDouble(result));
+                    }
+                }
+            }
+        }
+           return actualPrices;
+    }
 
 
 }
