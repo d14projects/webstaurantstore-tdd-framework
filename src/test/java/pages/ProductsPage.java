@@ -63,7 +63,6 @@ public void verifyContainsText(List<WebElement> list, String keyword){
     }
 }
 
-
     public List<Double> getRegularPrices() {
         List<Double> actualPrices = new ArrayList<>();
 
