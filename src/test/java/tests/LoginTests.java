@@ -1,5 +1,9 @@
 package tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
@@ -8,8 +12,12 @@ import utilities.Driver;
 import utilities.FrameworkConstants;
 import utilities.SeleniumUtils;
 
+import java.time.Duration;
+import java.util.List;
+
 public class LoginTests extends TestBase {
 
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 @Test (groups = "smoke")
 public void testValidCredentials() {
 
