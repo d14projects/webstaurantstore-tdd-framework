@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class HomePage {
 
@@ -63,8 +66,20 @@ private WebElement CommercialRefrigeration;
     @FindBy (xpath = "//p[@class='text-sm leading-none text-gray-900 group-hover:text-green-500 group-hover:underline mb-0 p-1 transition-all duration-75 ease-in-out mt-2 lt:mt-5' and contains(text(), 'New Items')]")
     private WebElement NewItems;
 
-    public void clickOnLink( WebElement linkName){
-       linkName.click();
+    @FindBy(xpath="//li[@class='text-center mb-8 group lt:mb-4']")
+    private List<WebElement> groupListOfFeaturedCategories;
+
+    public List<String> getTitlesOfFeaturedCategories(){
+
+        List<String> categoriesTitles = new ArrayList<>();
+        for (WebElement categories : groupListOfFeaturedCategories){
+            categoriesTitles.add(categories.getText());
+
+        }
+
+
+         return  categoriesTitles;
     }
+
 
 }
