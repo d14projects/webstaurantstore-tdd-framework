@@ -76,7 +76,7 @@ public class TestBase {
             logger.addScreenCaptureFromPath(pathOfScreenshotFile);
         }
 
-         Driver.quitDriver();
+           Driver.quitDriver();
     }
 
 
