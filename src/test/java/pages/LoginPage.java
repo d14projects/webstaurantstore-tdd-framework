@@ -17,7 +17,7 @@ import utilities.SeleniumUtils;
 import java.time.Duration;
 
 @Data
-public class LoginPage {
+public class LoginPage extends HeaderPage{
 
     public LoginPage(){
         PageFactory.initElements(Driver.getDriver(), this);
