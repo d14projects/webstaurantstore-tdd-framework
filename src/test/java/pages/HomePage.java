@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class HomePage {
+public class HomePage extends HeaderPage {
 
     public HomePage() {
         PageFactory.initElements(Driver.getDriver(), this);

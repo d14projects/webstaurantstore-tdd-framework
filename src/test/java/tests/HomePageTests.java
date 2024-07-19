@@ -93,5 +93,16 @@ public void verifyNumberOfCategories(){
         homePage.clickOnButtons(homePage.getBestSellingNextButton());
 
     }
+
+
+    @Test
+    public void clickOnHeaderLogo(){
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+      LoginPage login =  new LoginPage();
+      login.login();
+      login.getHeadLogo().click();
+        System.out.println(Driver.getDriver().getCurrentUrl());
+    }
+
 }
 
