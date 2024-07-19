@@ -88,8 +88,8 @@ public class SeleniumUtils {
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.titleIs(title)));
     }
 
-    public static void waitForUrlContains(String partOfUrl, int seconds){
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(seconds));
+    public static void waitForUrlContains(String partOfUrl){
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(2));
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.urlContains(partOfUrl)));
     }
 
