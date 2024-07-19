@@ -18,6 +18,12 @@ import java.util.List;
 public class HomePageTests extends TestBase {
 
     @Test
+    public void verifyHomePageTitle(){
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(),FrameworkConstants.HOMEPAGE_URL);
+    }
+
+    @Test
     public void clickingOnLogoFromTabletopPage(){
 
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
