@@ -12,10 +12,17 @@ import utilities.Driver;
 import utilities.FrameworkConstants;
 import utilities.SeleniumUtils;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomePageTests extends TestBase {
+
+    @Test
+    public void verifyHomePageUrl(){
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(),FrameworkConstants.HOMEPAGE_URL);
+    }
 
     @Test
     public void clickingOnLogoFromTabletopPage(){
@@ -72,5 +79,19 @@ public void verifyNumberOfCategories(){
         Assert.assertFalse(categoriesTitles.containsAll(expectedTitles));
     }
 
+    @Test
+    public void viewBestSellingProducts(){
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        new LoginPage().login();
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        SeleniumUtils.waitForUrlContains("https://www.webstaurantstore.com/");
+//        SeleniumUtils.scrollToElement(new HomePage().getBestSellingNextButton());
+        SeleniumUtils.waitFor(5);
+        HomePage homePage = new HomePage();
+        homePage.clickOnButtons(homePage.getBestSellingNextButton());
+        SeleniumUtils.waitFor(5);
+        homePage.clickOnButtons(homePage.getBestSellingNextButton());
+
+    }
 }
 
