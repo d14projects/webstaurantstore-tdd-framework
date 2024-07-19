@@ -91,7 +91,7 @@ public void verifyNumberOfCategories(){
         homePage.clickOnButtons(homePage.getBestSellingNextButton());
         SeleniumUtils.waitFor(5);
         homePage.clickOnButtons(homePage.getBestSellingNextButton());
-        SeleniumUtils.waitFor(5);
+
     }
 }
 
