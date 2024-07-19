@@ -27,7 +27,6 @@ public class HomePage extends HeaderPage {
 
     @FindBy(xpath = "//a[@class='hidden lt:block w-full xxl:w-auto']")
     private WebElement logo;
-
     public void clickOnLogo() {
         logo.click();
     }
@@ -41,6 +40,16 @@ public class HomePage extends HeaderPage {
     public WebElement getSmallwares() {
         return Smallwares;
     }
+
+
+
+
+    @FindBy(xpath = "//ul[@data-testid='carousel-best_selling']//div[@class='pricing text-center p-0']")
+    private List<WebElement> bestSellingProducts;
+
+
+
+
 
     @FindBy(xpath = "//p[@class='text-sm leading-none text-gray-900 group-hover:text-green-500 group-hover:underline mb-0 p-1 transition-all duration-75 ease-in-out mt-2 lt:mt-5' and contains(text(), 'Smallwares')]")
     private WebElement Smallwares;

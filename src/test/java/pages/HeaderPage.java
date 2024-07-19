@@ -12,5 +12,8 @@ public class HeaderPage {
 
         @FindBy(xpath = "//a[@class='hidden lt:block w-full xxl:w-auto']")
         private WebElement headLogo;
+    public void clickHeadLogo(){
+        headLogo.click();
+    }
 
 }

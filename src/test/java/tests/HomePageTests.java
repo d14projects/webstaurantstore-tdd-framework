@@ -100,9 +100,36 @@ public void verifyNumberOfCategories(){
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
       LoginPage login =  new LoginPage();
       login.login();
+      SeleniumUtils.waitFor(1);
       login.getHeadLogo().click();
         System.out.println(Driver.getDriver().getCurrentUrl());
     }
 
+
+    @Test
+    public void addToCartLowestBestSellingItem(){
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        LoginPage login = new LoginPage();
+        login.login();
+        logger.info("Sign in to account with valid credentials");
+        SeleniumUtils.waitFor(1);
+        login.clickHeadLogo();
+        logger.info("Navigate to Main Page clicking on the HeadLogo");
+        SeleniumUtils.waitForUrlContains("https://www.webstaurantstore.com/");
+
+        HomePage myTest = new HomePage();
+        List<String> pricesOfBestSellingProducts = new ArrayList<>();
+        for ( WebElement product : myTest.getBestSellingProducts() ) {
+            pricesOfBestSellingProducts.add(product.getText());
+        }
+        System.out.println(pricesOfBestSellingProducts);
+        logger.info("Create a List of prices for all Best Selling Products items");
+
+
+
+
+
+
+    }
 }
 
