@@ -52,27 +52,25 @@ public void verifyNumberOfCategories(){
     Assert.assertEquals(categoriesTitles.size(),18);
 }
 
-@Test(enabled = false)
-    public void clickOnEachCategoryLink(){
+    @Test
+    public void clickOnEachCategoryLink() {
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
 
-    List<WebElement> listOfFeaturedCategories = Driver.getDriver().findElements(By.xpath("//li[@class='text-center mb-8 group lt:mb-4']"));
-    List<String> categoriesTitles = new ArrayList<>();
-        for (WebElement element : listOfFeaturedCategories) {
-        categoriesTitles.add(element.getText());
-        element.click();
-        SeleniumUtils.waitFor(3);
-       //Assert.assertTrue(Driver.getDriver().getTitle().contains(actualTitleOfCategory),actualTitleOfCategory);
-        Driver.getDriver().navigate().back();
-        SeleniumUtils.waitFor(3);
+        List<WebElement> listOfFeaturedCategories = Driver.getDriver().findElements(By.xpath("//li[@class='text-center mb-8 group lt:mb-4']"));
+        List<String> categoriesTitles = new ArrayList<>();
 
+        for (int i = 0; i < listOfFeaturedCategories.size(); i++) {
+            listOfFeaturedCategories.get(i).click();
+            categoriesTitles.add(Driver.getDriver().getTitle());
+            Driver.getDriver().navigate().back();
+            Driver.getDriver().navigate().refresh();
+            listOfFeaturedCategories = Driver.getDriver().findElements(By.xpath("//li[@class='text-center mb-8 group lt:mb-4']"));
+        }
+        Driver.getDriver().navigate().refresh();
+        System.out.println("Print all titles:" + categoriesTitles.toString());
+        List<String> expectedTitles = new HomePage().getTitlesOfFeaturedCategories();
+        Assert.assertFalse(categoriesTitles.containsAll(expectedTitles));
     }
-    listOfFeaturedCategories = Driver.getDriver().findElements(By.xpath("//li[@class='text-center mb-8 group lt:mb-4']"));
-
-
-
-
-
 
 }
-}
+
