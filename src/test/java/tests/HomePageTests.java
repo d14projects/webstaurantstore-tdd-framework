@@ -14,18 +14,20 @@ import utilities.SeleniumUtils;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HomePageTests extends TestBase {
 
     @Test
-    public void verifyHomePageUrl(){
+    public void verifyHomePageUrl() {
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
-        Assert.assertEquals(Driver.getDriver().getCurrentUrl(),FrameworkConstants.HOMEPAGE_URL);
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(), FrameworkConstants.HOMEPAGE_URL);
     }
 
     @Test
-    public void clickingOnLogoFromTabletopPage(){
+    public void clickingOnLogoFromTabletopPage() {
 
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
         new LoginPage().login();
@@ -34,30 +36,31 @@ public class HomePageTests extends TestBase {
         logger.info("Click on Tabletop tab");
         new HomePage().clickOnLogo();
         logger.info("Click on the Logo to get to Homepage");
-        Assert.assertEquals(Driver.getDriver().getCurrentUrl() ,ConfigReader.getProperty("url"));
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(), ConfigReader.getProperty("url"));
     }
-@Test(groups="smoke")
-public void verifyUrlWhenClickingOnLogo(){
+
+    @Test(groups = "smoke")
+    public void verifyUrlWhenClickingOnLogo() {
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
         new HomePage().clickOnLogo();
         SeleniumUtils.waitFor(3);
         Assert.assertEquals(FrameworkConstants.HOMEPAGE_URL, "https://www.webstaurantstore.com/");
-}
-
-@Test
-public void verifyNumberOfCategories(){
-
-    Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
-    List<WebElement> listOfFeaturedCategories = Driver.getDriver().findElements(By.xpath("//li[@class='text-center mb-8 group lt:mb-4']"));
-
-    List<String> categoriesTitles = new ArrayList<>();
-    for (WebElement categories : listOfFeaturedCategories){
-        categoriesTitles.add(categories.getText());
-
     }
-    System.out.println(categoriesTitles);
-    Assert.assertEquals(categoriesTitles.size(),18);
-}
+
+    @Test
+    public void verifyNumberOfCategories() {
+
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        List<WebElement> listOfFeaturedCategories = Driver.getDriver().findElements(By.xpath("//li[@class='text-center mb-8 group lt:mb-4']"));
+
+        List<String> categoriesTitles = new ArrayList<>();
+        for (WebElement categories : listOfFeaturedCategories) {
+            categoriesTitles.add(categories.getText());
+
+        }
+        System.out.println(categoriesTitles);
+        Assert.assertEquals(categoriesTitles.size(), 18);
+    }
 
     @Test
     public void clickOnEachCategoryLink() {
@@ -80,7 +83,7 @@ public void verifyNumberOfCategories(){
     }
 
     @Test
-    public void viewBestSellingProducts(){
+    public void viewBestSellingProducts() {
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
         new LoginPage().login();
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
@@ -96,18 +99,18 @@ public void verifyNumberOfCategories(){
 
 
     @Test
-    public void clickOnHeaderLogo(){
+    public void clickOnHeaderLogo() {
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
-      LoginPage login =  new LoginPage();
-      login.login();
-      SeleniumUtils.waitFor(1);
-      login.getHeadLogo().click();
+        LoginPage login = new LoginPage();
+        login.login();
+        SeleniumUtils.waitFor(1);
+        login.getHeadLogo().click();
         System.out.println(Driver.getDriver().getCurrentUrl());
     }
 
 
     @Test
-    public void addToCartLowestBestSellingItem(){
+    public void addToCartLowestBestSellingItem() {
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
         LoginPage login = new LoginPage();
         login.login();
@@ -118,18 +121,52 @@ public void verifyNumberOfCategories(){
         SeleniumUtils.waitForUrlContains("https://www.webstaurantstore.com/");
 
         HomePage myTest = new HomePage();
+        boolean hasProducts = true;
         List<String> pricesOfBestSellingProducts = new ArrayList<>();
-        for ( WebElement product : myTest.getBestSellingProducts() ) {
-            pricesOfBestSellingProducts.add(product.getText());
+        while (hasProducts) {
+            for (WebElement product : myTest.getBestSellingProducts()) {
+                if (product.isDisplayed()) {
+                    pricesOfBestSellingProducts.add(product.getText());
+                }
+            }
+            if (myTest.getBestSellingNextButton().isDisplayed()) {
+                myTest.getBestSellingNextButton().click();
+                SeleniumUtils.waitFor(2);
+            } else {
+                hasProducts = false;
+
+            }
         }
-        System.out.println(pricesOfBestSellingProducts);
-        logger.info("Create a List of prices for all Best Selling Products items");
+            System.out.println(pricesOfBestSellingProducts.size()+","+pricesOfBestSellingProducts);
+            logger.info("Collected prices to the String list");
+            List<String> prices = new ArrayList<>();
+            for (String price : pricesOfBestSellingProducts) {
+                prices.add(price.replace("$", "").replace(",", "").replace("\\s ", "").split("/")[0]);
+            }
+            System.out.println(prices);
+            logger.info("Removed '$' and ',' , '\\s' ");
+            List<Double> doublePrices = prices.stream()
+                    .filter(price -> !price.trim().isEmpty()) // Filter out empty strings
+                    .map(price -> {
+                        try {
+                            return Double.parseDouble(price); // Convert to Double
+                        } catch (NumberFormatException e) {
+                            return null; // Return null for invalid numbers
+                        }
+                    })
+                    .filter(price -> price != null) // Filter out null values
+                    .collect(Collectors.toList()); // Collect to List<Double>
+           logger.info("Converted String to Double");
+
+            System.out.println(doublePrices);
+            Collections.sort(doublePrices);
+            System.out.println(doublePrices);
+            logger.info("Sorted prices ascending order:  " + prices);
+            System.out.println(doublePrices.get(0));
 
 
-
-
-
-
+        }
     }
-}
+
+
 
