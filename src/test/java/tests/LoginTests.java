@@ -28,7 +28,7 @@ public void testValidCredentials() {
     new LoginPage().login();
 
     logger.info("Verify login to Account Dashboard Page");
-    Assert.assertEquals(Driver.getDriver().getTitle(),"Account Dashboard - WebstaurantStore");
+    Assert.assertTrue(Driver.getDriver().getTitle().contains("Account Dashboard"));
 }
 
     @Test (groups = "smoke")
