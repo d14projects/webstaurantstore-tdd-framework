@@ -17,7 +17,6 @@ import java.util.List;
 
 public class LoginTests extends TestBase {
 
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 @Test (groups = "smoke")
 public void testValidCredentials() {
 
@@ -29,6 +28,8 @@ public void testValidCredentials() {
 
     logger.info("Verify login to Account Dashboard Page");
     Assert.assertTrue(Driver.getDriver().getTitle().contains("Account Dashboard"));
+
+
 }
 
     @Test (groups = "smoke")
