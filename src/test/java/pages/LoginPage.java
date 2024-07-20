@@ -67,7 +67,7 @@ public class LoginPage extends HeaderPage{
         SeleniumUtils.waitFor(1);
 
         maxRetry = 8;
-        attempt = 0;
+        attempt = 1;
         loginSuccesful = false;
 
         if (Driver.getDriver().getCurrentUrl().contains("https://www.webstaurantstore.com/login")) {
