@@ -28,8 +28,6 @@ public void testValidCredentials() {
 
     logger.info("Verify login to Account Dashboard Page");
     Assert.assertTrue(Driver.getDriver().getTitle().contains("Account Dashboard"));
-
-
 }
 
     @Test (groups = "smoke")
