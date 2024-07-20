@@ -48,37 +48,25 @@ public class LoginPage extends HeaderPage{
     @FindBy(xpath = "//button[@onclick='closeAlert(this)']")
     private WebElement closeAlertButtonEmail;
 
-
-WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-
     public void login(){
-        wait.until(ExpectedConditions.elementToBeClickable(accountButton)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(signInLink)).click();
+        accountButton.click();
+        signInLink.click();
+        emailField.sendKeys(ConfigReader.getProperty("username"));
+        passwordField.sendKeys(ConfigReader.getProperty("password"));
+        loginButton.click();
 
-        wait.until(ExpectedConditions.visibilityOf(emailField))
-                .sendKeys(ConfigReader.getProperty("username"));
-        wait.until(ExpectedConditions.visibilityOf(passwordField))
-                .sendKeys(ConfigReader.getProperty("password"));
-
-        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
-
-       SeleniumUtils.waitFor(1);
+       SeleniumUtils.waitFor(2);
 
         if (closeAlertButtonProblem.isEnabled()){
             SeleniumUtils.jsClick(closeAlertButtonProblem);
-
-            wait.until(ExpectedConditions.visibilityOf(passwordField))
-            .sendKeys(ConfigReader.getProperty("password"));
-            wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
-
+            passwordField.sendKeys(ConfigReader.getProperty("password"));
+            loginButton.click();
         } else if (closeAlertButtonEmail.isEnabled()){
             SeleniumUtils.jsClick(closeAlertButtonEmail);
-
-            wait.until(ExpectedConditions.visibilityOf(passwordField))
-                    .sendKeys(ConfigReader.getProperty("password"));
-            wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
+            passwordField.sendKeys(ConfigReader.getProperty("password"));
+            loginButton.click();
         }
-        SeleniumUtils.waitFor(2);
+        SeleniumUtils.waitFor(1);
     }
 
     public void login(String username, String password){
