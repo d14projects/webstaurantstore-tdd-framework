@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HeaderPage;
 import pages.HomePage;
 import pages.LocatingTabletop;
 import pages.LoginPage;
@@ -13,9 +14,7 @@ import utilities.FrameworkConstants;
 import utilities.SeleniumUtils;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class HomePageTests extends TestBase {
@@ -122,6 +121,7 @@ public class HomePageTests extends TestBase {
 
         HomePage myTest = new HomePage();
         boolean hasProducts = true;
+        Map<Double, WebElement> priceToElementMap = new HashMap<>();
         List<String> pricesOfBestSellingProducts = new ArrayList<>();
         while (hasProducts) {
             for (WebElement product : myTest.getBestSellingProducts()) {
@@ -129,6 +129,7 @@ public class HomePageTests extends TestBase {
                     pricesOfBestSellingProducts.add(product.getText());
                 }
             }
+
             if (myTest.getBestSellingNextButton().isDisplayed()) {
                 myTest.getBestSellingNextButton().click();
                 SeleniumUtils.waitFor(2);
@@ -137,36 +138,42 @@ public class HomePageTests extends TestBase {
 
             }
         }
-            System.out.println(pricesOfBestSellingProducts.size()+","+pricesOfBestSellingProducts);
-            logger.info("Collected prices to the String list");
-            List<String> prices = new ArrayList<>();
-            for (String price : pricesOfBestSellingProducts) {
-                prices.add(price.replace("$", "").replace(",", "").replace("\\s ", "").split("/")[0]);
-            }
-            System.out.println(prices);
-            logger.info("Removed '$' and ',' , '\\s' ");
-            List<Double> doublePrices = prices.stream()
-                    .filter(price -> !price.trim().isEmpty()) // Filter out empty strings
-                    .map(price -> {
-                        try {
-                            return Double.parseDouble(price); // Convert to Double
-                        } catch (NumberFormatException e) {
-                            return null; // Return null for invalid numbers
-                        }
-                    })
-                    .filter(price -> price != null) // Filter out null values
-                    .collect(Collectors.toList()); // Collect to List<Double>
-           logger.info("Converted String to Double");
-
-            System.out.println(doublePrices);
-            Collections.sort(doublePrices);
-            System.out.println(doublePrices);
-            logger.info("Sorted prices ascending order:  " + prices);
-            System.out.println(doublePrices.get(0));
-
-
+        System.out.println(pricesOfBestSellingProducts.size() + "," + pricesOfBestSellingProducts);
+        logger.info("Collected prices to the String list");
+        List<String> prices = new ArrayList<>();
+        for (String price : pricesOfBestSellingProducts) {
+            prices.add(price.replace("$", "").replace(",", "").replace("\\s ", "").split("/")[0]);
         }
+        System.out.println(prices);
+        logger.info("Removed '$' and ',' , '\\s' ");
+        List<Double> doublePrices = prices.stream()
+                .filter(price -> !price.trim().isEmpty()) // Filter out empty strings
+                .map(price -> {
+                    try {
+                        return Double.parseDouble(price); // Convert to Double
+                    } catch (NumberFormatException e) {
+                        return null; // Return null for invalid numbers
+                    }
+                })
+                .filter(price -> price != null) // Filter out null values
+                .collect(Collectors.toList()); // Collect to List<Double>
+        logger.info("Converted String to Double");
+
+        System.out.println(doublePrices);
+        Collections.sort(doublePrices);
+        System.out.println(doublePrices);
+        logger.info("Sorted prices ascending order:  " + prices);
+        System.out.println(doublePrices.get(0));
+        Double lowestPrice = doublePrices.get(0);
     }
+        @Test
+        public void hoverNavigationBarElement(){
+            Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+            SeleniumUtils.hover(new HeaderPage().getFoodAndBeverage());
+            SeleniumUtils.waitFor(3);
+        }
+        }
+
 
 
 
