@@ -15,6 +15,7 @@ import utilities.Driver;
 import utilities.SeleniumUtils;
 
 import java.time.Duration;
+import java.util.Random;
 
 @Data
 public class LoginPage extends HeaderPage{
@@ -48,44 +49,69 @@ public class LoginPage extends HeaderPage{
     @FindBy(xpath = "//button[@onclick='closeAlert(this)']")
     private WebElement closeAlertButtonEmail;
 
-    public void login(){
+    private int maxRetry;
+    private int attempt;
+    private boolean loginSuccesful;
+
+    public void login() {
         accountButton.click();
+        SeleniumUtils.waitFor(1);
         signInLink.click();
+        SeleniumUtils.waitFor(1);
         emailField.sendKeys(ConfigReader.getProperty("username"));
+        SeleniumUtils.waitFor(new Random().nextInt(4)+8);
         passwordField.sendKeys(ConfigReader.getProperty("password"));
+        SeleniumUtils.waitFor(new Random().nextInt(4)+8);
         loginButton.click();
 
-       SeleniumUtils.waitFor(2);
-
-        if (closeAlertButtonProblem.isEnabled()){
-            SeleniumUtils.jsClick(closeAlertButtonProblem);
-            passwordField.sendKeys(ConfigReader.getProperty("password"));
-            loginButton.click();
-        } else if (closeAlertButtonEmail.isEnabled()){
-            SeleniumUtils.jsClick(closeAlertButtonEmail);
-            passwordField.sendKeys(ConfigReader.getProperty("password"));
-            loginButton.click();
-        }
         SeleniumUtils.waitFor(1);
+
+        maxRetry = 8;
+        attempt = 0;
+        loginSuccesful = false;
+
+        if (Driver.getDriver().getCurrentUrl().contains("https://www.webstaurantstore.com/login")) {
+            do {
+                attempt++;
+                try {
+                    accountButton.click();
+                    SeleniumUtils.waitFor(1);
+                    signInLink.click();
+                    SeleniumUtils.waitFor(1);
+                    emailField.sendKeys(ConfigReader.getProperty("username"));
+                    SeleniumUtils.waitFor(new Random().nextInt(4)+8);
+                    passwordField.sendKeys(ConfigReader.getProperty("password"));
+                    SeleniumUtils.waitFor(new Random().nextInt(4)+8);
+                    loginButton.click();
+                    SeleniumUtils.waitFor(1);
+
+                    if (Driver.getDriver().getTitle().contains("Dashboard")) {
+                        loginSuccesful = true;
+                        System.out.println("Successful login at " + attempt + " attempt");
+                        break;
+                    }
+                    if (attempt == maxRetry) {
+                        System.out.println("Failed to login after " + maxRetry + " attempts");
+                        break;
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } while (Driver.getDriver().getCurrentUrl().contains("login"));
+        }
     }
 
     public void login(String username, String password){
         accountButton.click();
+        SeleniumUtils.waitFor(1);
         signInLink.click();
+        SeleniumUtils.waitFor(1);
         emailField.sendKeys(username);
+        SeleniumUtils.waitFor(new Random().nextInt(4)+8);
         passwordField.sendKeys(password);
+        SeleniumUtils.waitFor(new Random().nextInt(4)+8);
         loginButton.click();
         SeleniumUtils.waitFor(1);
-        if (closeAlertButtonProblem.isEnabled()){
-            SeleniumUtils.jsClick(closeAlertButtonProblem);
-            passwordField.sendKeys(password);
-            loginButton.click();
-        } else if (closeAlertButtonEmail.isEnabled()){
-            SeleniumUtils.jsClick(closeAlertButtonEmail);
-            passwordField.sendKeys(password);
-            loginButton.click();
-        }
-        SeleniumUtils.waitFor(3);
     }
 
 }
