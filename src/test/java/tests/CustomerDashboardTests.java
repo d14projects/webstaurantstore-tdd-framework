@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CustomerDashboardTests extends TestBase {
 
-    @Test
+    @Test (groups = "smoke")
     public void VerifyCustomerEmail(){
         logger.info("Navigate to homepage");
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
@@ -34,7 +34,7 @@ public class CustomerDashboardTests extends TestBase {
         Assert.assertTrue(new CustomerDashboardPage().getEmail().contains(ConfigReader.getProperty("username")));
     }
 
-    @Test
+    @Test (groups = "smoke")
     public void VerifyCustomerName(){
         logger.info("Navigate to homepage");
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
@@ -66,7 +66,7 @@ public class CustomerDashboardTests extends TestBase {
     }
 
 
-    @Test (groups = "smoke")
+    @Test
     public void verifyProducts() {
 
         logger.info("Navigate to homepage");
