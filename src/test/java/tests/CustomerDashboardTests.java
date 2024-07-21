@@ -87,7 +87,7 @@ public class CustomerDashboardTests extends TestBase {
     }
 
 
-    @Test (groups = "smoke")
+    @Test
     public void verifyPriceFilterLowToHigh() {
 
         logger.info("Navigate to homepage");
