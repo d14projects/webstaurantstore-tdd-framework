@@ -66,7 +66,7 @@ public class LoginPage extends HeaderPage{
 
         SeleniumUtils.waitFor(1);
 
-        maxRetry = 8;
+        maxRetry = 5;
         attempt = 1;
         loginSuccesful = false;
 
