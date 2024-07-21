@@ -59,9 +59,9 @@ public class LoginPage extends HeaderPage{
         signInLink.click();
         SeleniumUtils.waitFor(1);
         emailField.sendKeys(ConfigReader.getProperty("username"));
-        SeleniumUtils.waitFor(new Random().nextInt(4)+4);
+        SeleniumUtils.waitFor(new Random().nextInt(3)+4);
         passwordField.sendKeys(ConfigReader.getProperty("password"));
-        SeleniumUtils.waitFor(new Random().nextInt(4)+2);
+        SeleniumUtils.waitFor(new Random().nextInt(3)+2);
         loginButton.click();
 
         SeleniumUtils.waitFor(1);
@@ -107,9 +107,9 @@ public class LoginPage extends HeaderPage{
         signInLink.click();
         SeleniumUtils.waitFor(1);
         emailField.sendKeys(username);
-        SeleniumUtils.waitFor(new Random().nextInt(4)+8);
+        SeleniumUtils.waitFor(new Random().nextInt(3)+2);
         passwordField.sendKeys(password);
-        SeleniumUtils.waitFor(new Random().nextInt(4)+8);
+        SeleniumUtils.waitFor(new Random().nextInt(3)+3);
         loginButton.click();
         SeleniumUtils.waitFor(1);
     }
