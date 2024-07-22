@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.SearchBarPage;
+import utilities.DataProviderSearchBar;
 import utilities.Driver;
 import utilities.FrameworkConstants;
 
@@ -40,6 +41,13 @@ public class SearchBar extends TestBase {
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
         new SearchBarPage().searchForItem("table");
         new SearchBarPage().assertSearchResultsContain("table");
+    }
+    @Test(dataProvider = "searchData", dataProviderClass = DataProviderSearchBar.class)
+    public void searchBar2(String searchTerm, String expectedKeyword){
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        new SearchBarPage().searchForItem(searchTerm);
+        new SearchBarPage().assertSearchResultsContain(expectedKeyword);
+
     }
 }
 

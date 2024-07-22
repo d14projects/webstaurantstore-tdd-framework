@@ -93,6 +93,7 @@ public class SeleniumUtils {
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.urlContains(partOfUrl)));
     }
 
+
     public static void waitFor(int seconds){
         try{
             Thread.sleep(seconds * 1000L);
@@ -186,5 +187,7 @@ public class SeleniumUtils {
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         js.executeScript("window.scrollBy("+x+", "+y+");");
     }
+
+
 
 }

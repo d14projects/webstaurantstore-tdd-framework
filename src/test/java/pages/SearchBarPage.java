@@ -35,7 +35,13 @@ public class SearchBarPage {
                 Assert.assertTrue(result.getText().contains(keyword), "Search result does not contain the keyword: " + keyword);
             }
         }
-
+        public Object[][] searchData(){
+            return new Object[][]{
+                    {"plates"},
+                    {"cups"},
+                    {"tables"}
+            };
+        }
 
         }
 
