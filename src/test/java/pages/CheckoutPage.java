@@ -50,7 +50,7 @@ public class CheckoutPage {
 
 
     public void checkout() {
-        email.sendKeys(ConfigReader.getProperty("email"), Keys.TAB, Keys.TAB,ConfigReader.getProperty("name"), Keys.TAB,
+        email.sendKeys(ConfigReader.getProperty("email"), Keys.TAB, Keys.TAB,ConfigReader.getProperty("fullName"), Keys.TAB,
                 ConfigReader.getProperty("company"), Keys.TAB, ConfigReader.getProperty("address"), Keys.TAB,
                 ConfigReader.getProperty("address2"),Keys.TAB,Keys.TAB, ConfigReader.getProperty("zip"),Keys.TAB,
         ConfigReader.getProperty("phone"));
