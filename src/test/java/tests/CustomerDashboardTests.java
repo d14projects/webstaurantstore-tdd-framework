@@ -32,6 +32,17 @@ public class CustomerDashboardTests extends TestBase {
 
         logger.info("Verify Account Dashboard contains customer email " + ConfigReader.getProperty("username"));
         Assert.assertTrue(new CustomerDashboardPage().getEmail().contains(ConfigReader.getProperty("username")));
+        SeleniumUtils.waitFor(1);
+
+        logger.info("Log out");
+        new LoginPage().logout();
+        SeleniumUtils.waitFor(1);
+
+        new LoginPage().getAccountButton().click();
+        SeleniumUtils.waitFor(1);
+
+        logger.info("Verify Logout as webpage contains customer Log in link");
+        Assert.assertTrue(new LoginPage().getSignInLink().isDisplayed());
     }
 
     @Test (groups = "smoke")
@@ -47,6 +58,17 @@ public class CustomerDashboardTests extends TestBase {
 
         logger.info("Verify Account Dashboard contains customer full name " + ConfigReader.getProperty("name"));
         Assert.assertTrue(new CustomerDashboardPage().getEmail().contains(ConfigReader.getProperty("name")));
+        SeleniumUtils.waitFor(1);
+
+        logger.info("Log out");
+        new LoginPage().logout();
+        SeleniumUtils.waitFor(2);
+
+        new LoginPage().getAccountButton().click();
+        SeleniumUtils.waitFor(1);
+
+        logger.info("Verify Logout as webpage contains customer Log in link");
+        Assert.assertTrue(new LoginPage().getSignInLink().isDisplayed());
     }
 
     @Test
@@ -63,6 +85,18 @@ public class CustomerDashboardTests extends TestBase {
 
         logger.info("Restaurant Equipment is displayed on Page Title");
         Assert.assertTrue(Driver.getDriver().getTitle().contains(FrameworkConstants.EQUIPMENT_FAMILY));
+
+        SeleniumUtils.waitFor(1);
+
+        logger.info("Log out");
+        new LoginPage().logout();
+
+        SeleniumUtils.waitFor(1);
+        new LoginPage().getAccountButton().click();
+        SeleniumUtils.waitFor(1);
+
+        logger.info("Verify Logout as webpage contains customer Log in link");
+        Assert.assertTrue(new LoginPage().getSignInLink().isDisplayed());
     }
 
 
@@ -84,6 +118,16 @@ public class CustomerDashboardTests extends TestBase {
 
         logger.info("Verify page title contains: " + FrameworkConstants.PRODUCT_NAME);
         Assert.assertTrue(Driver.getDriver().getTitle().contains(FrameworkConstants.PRODUCT_NAME));
+
+        logger.info("Log out");
+        new LoginPage().logout();
+
+        SeleniumUtils.waitFor(1);
+        new LoginPage().getAccountButton().click();
+        SeleniumUtils.waitFor(1);
+
+        logger.info("Verify Logout as webpage contains customer Log in link");
+        Assert.assertTrue(new LoginPage().getSignInLink().isDisplayed());
     }
 
 
@@ -121,6 +165,16 @@ public class CustomerDashboardTests extends TestBase {
 
         logger.info("Verify Actual Prices equals Expected Prices"); //bug
         Assert.assertEquals(actualPrices, expectedPrices);
+
+        logger.info("Log out");
+        new LoginPage().logout();
+
+        SeleniumUtils.waitFor(1);
+        new LoginPage().getAccountButton().click();
+        SeleniumUtils.waitFor(1);
+
+        logger.info("Verify Logout as webpage contains customer Log in link");
+        Assert.assertTrue(new LoginPage().getSignInLink().isDisplayed());
     }
 
     @Test //bug
@@ -157,6 +211,16 @@ public class CustomerDashboardTests extends TestBase {
 
         logger.info("Verify Actual Prices equals Expected Prices"); //bug
         Assert.assertEquals(actualPrices, expectedPrices);
+
+        logger.info("Log out");
+        new LoginPage().logout();
+
+        SeleniumUtils.waitFor(1);
+        new LoginPage().getAccountButton().click();
+        SeleniumUtils.waitFor(1);
+
+        logger.info("Verify Logout as webpage contains customer Log in link");
+        Assert.assertTrue(new LoginPage().getSignInLink().isDisplayed());
     }
 
 

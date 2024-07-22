@@ -34,6 +34,9 @@ public class LoginPage extends HeaderPage{
     @FindBy(linkText = "Sign In")
     private WebElement signInLink;
 
+    @FindBy(linkText = "Log Out")
+    private WebElement logOutLink;
+
     @FindBy(id = "email")
     private WebElement emailField;
 
@@ -114,7 +117,18 @@ public class LoginPage extends HeaderPage{
         SeleniumUtils.waitFor(1);
     }
 
-}
+    public void logout() {
+        accountButton.click();
+        SeleniumUtils.waitFor(2);
+        logOutLink.click();
+        SeleniumUtils.waitFor(1);
+    }
+
+    @FindBy(id ="loginRegion")
+    private WebElement loginBox;
+
+
+    }
 
 
 
