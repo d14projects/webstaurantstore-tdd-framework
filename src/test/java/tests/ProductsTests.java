@@ -17,22 +17,23 @@ import java.util.List;
 
 public class ProductsTests extends TestBase{
 
+
     @Test (groups = "smoke")
     public void verifyPriceFilterLowToHigh() {
 
         logger.info("Navigate to homepage");
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
 
-        logger.info("Click on a link on a Equipment Bar: " + ConfigReader.getProperty("equipmentFamily"));
-        new EquipmentBarPage().clickOnLink(ConfigReader.getProperty("equipmentFamily"));
+        logger.info("Click on a link on a Equipment Bar: " + FrameworkConstants.EQUIPMENT_FAMILY);
+        new EquipmentBarPage().clickOnLink(FrameworkConstants.EQUIPMENT_FAMILY);
         SeleniumUtils.waitFor(2);
 
-        logger.info("Enter Card Title: " + ConfigReader.getProperty("equipmentCard") + " and Click");
-        String expectedTitle = ConfigReader.getProperty("equipmentCard");
+        logger.info("Enter Card Title: " + FrameworkConstants.EQUIPMENT_CARD + " and Click");
+        String expectedTitle = FrameworkConstants.EQUIPMENT_CARD;
         new EquipmentBarPage().clickOnCard(expectedTitle);
 
-        logger.info("Click on Product: " + ConfigReader.getProperty("productName"));
-        new ProductsPage().clickOnProduct(ConfigReader.getProperty("productName"));
+        logger.info("Click on Product: " + FrameworkConstants.PRODUCT_NAME);
+        new ProductsPage().clickOnProduct(FrameworkConstants.PRODUCT_NAME);
 
         logger.info("Select Price: Low to High Filter from the Dropdown Menu");
         Select priceDropdown = new Select(new ProductsPage().getDropdownMenu());
@@ -56,16 +57,16 @@ public class ProductsTests extends TestBase{
         logger.info("Navigate to homepage");
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
 
-        logger.info("Click on a link on a Equipment Bar: " + ConfigReader.getProperty("equipmentFamily"));
-        new EquipmentBarPage().clickOnLink(ConfigReader.getProperty("equipmentFamily"));
+        logger.info("Click on a link on a Equipment Bar: " + FrameworkConstants.EQUIPMENT_FAMILY);
+        new EquipmentBarPage().clickOnLink(FrameworkConstants.EQUIPMENT_FAMILY);
         SeleniumUtils.waitFor(2);
 
-        logger.info("Enter Card Title: " + ConfigReader.getProperty("equipmentCard") + " and Click");
-        String expectedTitle = ConfigReader.getProperty("equipmentCard");
+        logger.info("Enter Card Title: " + FrameworkConstants.EQUIPMENT_CARD + " and Click");
+        String expectedTitle = FrameworkConstants.EQUIPMENT_CARD;
         new EquipmentBarPage().clickOnCard(expectedTitle);
 
-        logger.info("Click on Product: " + ConfigReader.getProperty("productName"));
-        new ProductsPage().clickOnProduct(ConfigReader.getProperty("productName"));
+        logger.info("Click on Product: " + FrameworkConstants.PRODUCT_NAME);
+        new ProductsPage().clickOnProduct(FrameworkConstants.PRODUCT_NAME);
 
         logger.info("Select Price: High to Low Filter from the Dropdown Menu");
         Select priceDropdown = new Select(new ProductsPage().getDropdownMenu());
@@ -90,16 +91,16 @@ public class ProductsTests extends TestBase{
         logger.info("Navigate to homepage");
         Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
 
-        logger.info("Click on a link on a Equipment Bar: " + ConfigReader.getProperty("equipmentFamily"));
-        new EquipmentBarPage().clickOnLink(ConfigReader.getProperty("equipmentFamily"));
+        logger.info("Click on a link on a Equipment Bar: " + FrameworkConstants.EQUIPMENT_FAMILY);
+        new EquipmentBarPage().clickOnLink(FrameworkConstants.EQUIPMENT_FAMILY);
         SeleniumUtils.waitFor(2);
 
-        logger.info("Enter Card Title: " + ConfigReader.getProperty("equipmentCard") + " and Click");
-        String expectedTitle = ConfigReader.getProperty("equipmentCard");
+        logger.info("Enter Card Title: " + FrameworkConstants.EQUIPMENT_CARD + " and Click");
+        String expectedTitle = FrameworkConstants.EQUIPMENT_CARD;
         new EquipmentBarPage().clickOnCard(expectedTitle);
 
-        logger.info("Click on Product: " + ConfigReader.getProperty("productName"));
-        new ProductsPage().clickOnProduct(ConfigReader.getProperty("productName"));
+        logger.info("Click on Product: " + FrameworkConstants.PRODUCT_NAME);
+        new ProductsPage().clickOnProduct(FrameworkConstants.PRODUCT_NAME);
 
         logger.info("Verify products on sale contain word: \"Sale\"");
         new ProductsPage().verifyContainsText(new ProductsPage().getProductsOnSale(), "Sale");

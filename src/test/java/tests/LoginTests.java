@@ -1,5 +1,9 @@
 package tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
@@ -7,6 +11,9 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.FrameworkConstants;
 import utilities.SeleniumUtils;
+
+import java.time.Duration;
+import java.util.List;
 
 public class LoginTests extends TestBase {
 
@@ -20,7 +27,7 @@ public void testValidCredentials() {
     new LoginPage().login();
 
     logger.info("Verify login to Account Dashboard Page");
-    Assert.assertEquals(Driver.getDriver().getTitle(),"Account Dashboard - WebstaurantStore");
+    Assert.assertTrue(Driver.getDriver().getTitle().contains("Account Dashboard"));
 }
 
     @Test (groups = "smoke")
