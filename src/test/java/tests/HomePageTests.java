@@ -106,7 +106,12 @@ public class HomePageTests extends TestBase {
         login.getHeadLogo().click();
         System.out.println(Driver.getDriver().getCurrentUrl());
     }
-
+    @Test
+    public void hoverNavigationBarElement(){
+        Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
+        SeleniumUtils.hover(new HeaderPage().getFoodAndBeverage());
+        SeleniumUtils.waitFor(3);
+    }
 
     @Test
     public void addToCartLowestBestSellingItem() {
@@ -159,19 +164,14 @@ public class HomePageTests extends TestBase {
                 .collect(Collectors.toList()); // Collect to List<Double>
         logger.info("Converted String to Double");
 
-        System.out.println(doublePrices);
+
         Collections.sort(doublePrices);
-        System.out.println(doublePrices);
+        System.out.println("Sorted prices ascending order:  "+ doublePrices);
         logger.info("Sorted prices ascending order:  " + prices);
-        System.out.println(doublePrices.get(0));
+        System.out.println("The Lowest cost is : $" + doublePrices.get(0));
         Double lowestPrice = doublePrices.get(0);
     }
-        @Test
-        public void hoverNavigationBarElement(){
-            Driver.getDriver().get(FrameworkConstants.HOMEPAGE_URL);
-            SeleniumUtils.hover(new HeaderPage().getFoodAndBeverage());
-            SeleniumUtils.waitFor(3);
-        }
+
         }
 
 
