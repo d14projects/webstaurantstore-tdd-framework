@@ -40,6 +40,7 @@ public class TestBase {
     extentReports.setSystemInfo("SDETs: ", "Yana V, Kenan M, Zina M");
     extentReports.setSystemInfo("OS", System.getProperty("os.name"));
     extentReports.setSystemInfo("Browser",
+
     System.getProperty("browser") == null ? ConfigReader.getProperty("browser") : System.getProperty("browser") );
 
         extentReports.setSystemInfo("Homepage", FrameworkConstants.HOMEPAGE_URL);

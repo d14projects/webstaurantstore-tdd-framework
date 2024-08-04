@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Parallel Test Methods" parallel="methods" thread-count="14">
+<suite name="Parallel Test Methods" parallel="methods" thread-count="8">
 
     <test name="UI Regression Parallel Tests">
 
@@ -11,6 +11,7 @@
             <class name="tests.SearchBar"></class>
             <class name="tests.TableTopTest"></class>
             <class name="tests.CustomerDashboardTests"/>
+            <class name="tests.EndToEndTest"/>
         </classes>
 
     </test>
